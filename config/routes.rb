@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  root "transactions#index"
 
   get "/transactions", to: "transactions#index"
   get "/transactions/:id", to: "transactions#show"
