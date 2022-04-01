@@ -16,8 +16,11 @@ ActiveRecord::Schema.define(version: 2022_03_30_112413) do
   enable_extension "plpgsql"
 
   create_table "transactions", force: :cascade do |t|
-    t.string "title"
-    t.text "body"
+    t.string "customer_id"
+    t.string "input_currency"
+    t.integer "input_amount"
+    t.string "output_currency"
+    t.integer "output_amount"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

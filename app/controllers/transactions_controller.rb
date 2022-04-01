@@ -1,5 +1,7 @@
 class TransactionsController < ApplicationController
-  skip_before_action :verify_authenticity_token
+  skip_before_action :verify_authenticity_token # to stop ActionController::InvalidAuthenticityToken
+
+  include ExchangeRate
 
   def index
     transactions = Transaction.all
@@ -13,30 +15,27 @@ class TransactionsController < ApplicationController
 
   def create
     transaction = Transaction.new(transaction_params)
+
+    calculate_output_amount(transaction)
     
     if transaction.save
-      render json: transaction
+      render json: transaction, status: :created # 201 Successfully create entry
     else
       render :new, status: :unprocessable_entity
     end
   end
 
+  def calculate_output_amount(transaction)
+    exchange_rate = get_exchange_rate(transaction) # see ExchangeRate module 
+    transaction.output_amount = transaction.input_amount * exchange_rate
+  end
+
   private
 
   def transaction_params
-    params.require(:transaction).permit(:title, :body)
+    params.require(:transaction).permit(:customer_id, :input_currency, :input_amount, :output_currency, :output_amount)
   end
 
 end
 
-# Take JSON from params. 
-
-# Put it in the database. 
-
-# Cors working
-
-# Fetching a specific transaction information is working. 
-
-# Create transaction still needs to work. 
-
-# 
+# check if params match the db columns. 
