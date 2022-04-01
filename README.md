@@ -21,9 +21,12 @@ This is going to be one of the first systems in our new microservice based backe
 
 ## Getting Started
 
+This tutorial assumes you have PostgreSQL install on your computer, with the database on your computer called `aza_finance_development`.
+
 Clone this repo and navigate to the route directory of this project.
-In your terminal run this to start the server :
+In your terminal run this to install the gems and start the server :
 ```
+bundle install
 bin/rails server  
 ```
 
