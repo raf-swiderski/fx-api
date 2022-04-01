@@ -77,8 +77,10 @@ To view a single transaction add the id at the end. E.g. `http://localhost:3000/
 
 These are some improvements I would make to the system next!
 
-- Allow for 2 more decimal places for currencies in the database. I.e. floats 
-- 
+- In the database, allow for 2 more decimal places for output currency values and input. I.e. floats instead of integers.
+- Get the professional version of the API in order to change the input currency.
+
+
 
 
  
