@@ -30,6 +30,19 @@ class TransactionsController < ApplicationController
     transaction.output_amount = transaction.input_amount * exchange_rate
   end
 
+  def state
+    puts params[:id]
+    transaction = Transaction.find(params[:id])
+
+    if transaction.update(state: "paid")
+      render json: transaction, status: :created
+    else 
+      render :new, status: :unprocessable_entity
+    end
+
+
+  end
+
   private
 
   def transaction_params
