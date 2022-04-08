@@ -8,6 +8,6 @@ const stateRequestHeaders = {
   }
 
 state.addEventListener('click', () => {
-    var url = `${host}/${endpoint}/paid/1`
+    var url = `${host}/${endpoint}/paid/2`
     request(url, stateRequestHeaders);
 });

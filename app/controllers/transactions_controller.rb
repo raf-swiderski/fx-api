@@ -3,6 +3,7 @@ class TransactionsController < ApplicationController
 
   include ExchangeRate
 
+
   def index
     transactions = Transaction.all
     render json: transactions
@@ -16,7 +17,7 @@ class TransactionsController < ApplicationController
   def create
     transaction = Transaction.new(transaction_params)
 
-    calculate_output_amount(transaction)
+    transaction.calculate_output_amount(transaction)
     
     if transaction.save
       render json: transaction, status: :created # 201 Successfully create entry
@@ -25,13 +26,7 @@ class TransactionsController < ApplicationController
     end
   end
 
-  def calculate_output_amount(transaction)
-    exchange_rate = get_exchange_rate(transaction) # see ExchangeRate module 
-    transaction.output_amount = transaction.input_amount * exchange_rate
-  end
-
   def state
-    puts params[:id]
     transaction = Transaction.find(params[:id])
 
     if transaction.update(state: "paid")
