@@ -38,4 +38,8 @@ class TransactionsController < ApplicationController
 
 end
 
-# check if params match the db columns. 
+# state field 
+
+# column on transaction 
+
+# default of created
